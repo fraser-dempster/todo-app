@@ -1,0 +1,77 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100vw;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.grid-container {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: grid;
+  grid-template:
+    "navbar navbar"
+    "sidebar content-grid"
+    "sidebar content-grid";
+  grid-template-columns: 0.5fr 2fr;
+  grid-template-rows: 0.25fr 1fr 1fr;
+}
+
+.navbar {
+  grid-area: navbar;
+  background-color: cadetblue;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20px 0px 20px;
+}
+
+.content-grid {
+  grid-area: content-grid;
+  background-color: pink;
+}
+
+.todo-item {
+  width: 200px;
+  height: 50px;
+}
+
+.project {
+  width: 100%;
+  height: 100%;
+  padding: 10px 0px 10px 0px;
+
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+}
+
+.todoInputContainer {
+  display: block;
+}
+
+.todoInput {
+  width: 60%;
+  padding: 10px;
+}
