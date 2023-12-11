@@ -1,5 +1,7 @@
 import { Project } from "./project";
 
+const project = new Project("default");
+
 function createTodo(title, description, project) {
   return {
     title: title,
@@ -53,8 +55,6 @@ function toggleAddTodoButton() {
 }
 
 function addTodo() {
-  const project = new Project("default");
-
   const todoInput = document.getElementById("todoInput");
   const todoText = todoInput.value.trim();
   const todoList = document.getElementById("todo-list");
