@@ -1,4 +1,4 @@
-const { Project } = require("./project");
+import { Project } from "./project";
 
 function createTodo(title, description, project) {
   return {
@@ -26,16 +26,30 @@ function createTodo(title, description, project) {
   };
 }
 
+function focusCursorOnInput(inputId) {
+  document.getElementById(inputId).focus();
+}
+
+function setInputValueToEmptyString(inputId) {
+  document.getElementById(inputId).value = "";
+}
+
 function toggleTodoInput() {
   const todoInputContainer = document.getElementById("todoInputContainer");
-  const toggleButton = document.getElementById("toggleInput");
   todoInputContainer.style.display =
-    todoInputContainer.style.display === "none" ? "block" : "none";
+    todoInputContainer.style.display === "block" ? "none" : "block";
 
   if (todoInputContainer.style.display === "block") {
-    document.getElementById("todoInput").focus();
-    toggleButton.style.display = "none";
+    focusCursorOnInput("todoInput");
+  } else {
+    setInputValueToEmptyString("todoInput");
   }
+}
+
+function toggleAddTodoButton() {
+  const addTodoButton = document.getElementById("addTodoButton");
+  addTodoButton.style.display =
+    addTodoButton.style.display === "none" ? "block" : "none";
 }
 
 function addTodo() {
@@ -45,12 +59,16 @@ function addTodo() {
   const todoText = todoInput.value.trim();
   const todoList = document.getElementById("todo-list");
   const newTodo = createTodo(todoText, "", project);
+  project.todos.push(newTodo);
 
   const todoElement = newTodo.createTodoElement();
   todoList.appendChild(todoElement);
+
+  project.todos.forEach((item) => console.log(item));
 }
 
-document.getElementById("toggleInput").addEventListener("click", function () {
+document.getElementById("addTodoButton").addEventListener("click", function () {
+  toggleAddTodoButton();
   toggleTodoInput();
 });
 
@@ -58,6 +76,8 @@ document
   .getElementById("createTodoButton")
   .addEventListener("click", function () {
     addTodo();
+    toggleAddTodoButton();
+    toggleTodoInput();
   });
 // this.editDescription = (newDescription) => {
 //   this.description = newDescription;
