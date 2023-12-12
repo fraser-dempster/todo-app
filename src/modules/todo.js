@@ -1,6 +1,6 @@
-import { Project } from "./project";
+import { createProject } from "./project";
 
-const project = new Project("default");
+const project = createProject("default");
 
 function createTodo(title, description, project) {
   return {
@@ -59,12 +59,13 @@ function addTodo() {
   const todoText = todoInput.value.trim();
   const todoList = document.getElementById("todo-list");
   const newTodo = createTodo(todoText, "", project);
-  project.todos.push(newTodo);
+
+  project.addTodo(newTodo);
 
   const todoElement = newTodo.createTodoElement();
   todoList.appendChild(todoElement);
 
-  project.todos.forEach((item) => console.log(item));
+  project.getTodoItems();
 }
 
 document.getElementById("addTodoButton").addEventListener("click", function () {

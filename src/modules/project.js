@@ -1,28 +1,43 @@
-export class Project {
-  constructor(name) {
-    this.name = name;
-    this.todos = [];
+export function createProject(name) {
+  return {
+    name: name,
+    todos: [],
 
-    // this.getName = () => {
-    //   return this.name;
-    // };
+    addTodo(todo) {
+      this.todos.push(todo);
+    },
 
-    this.addTodo = (newTodo) => {
-      this.todos.push(newTodo);
-    };
+    getTodoItems() {
+      this.todos.forEach((element) => {
+        console.log(element.title);
+      });
+    },
 
-    // this.removeTodo = (oldTodo) => {
-    //   this.todos.splice(this.todos.indexOf(oldTodo), 1);
-    // };
+    createProjectElement() {
+      const projectElement = document.createElement("button");
+      projectElement.className = "projectElement";
+      projectElement.textContent = this.name;
 
-    // this.findTodo = (todo) => {
-    //   if (this.todos.includes(todo)) {
-    //     return this.todos.indexOf(todo);
-    //   }
-    // };
-
-    // this.getAllTodos = () => {
-    //   this.todos.forEach((item) => console.log(item));
-    // };
-  }
+      return projectElement;
+    },
+  };
 }
+
+export function addProject(projectList) {
+  const projectInput = document.getElementById("projectInput");
+  const projectText = projectInput.value.trim();
+  const projectListElement = document.getElementById("project-list");
+
+  const newProject = createProject(projectText);
+  projectList.projects.push(newProject);
+  console.log(projectList);
+
+  const projectElement = newProject.createProjectElement();
+
+  projectListElement.appendChild(projectElement);
+}
+
+// document.getElementById("addTodoButton").addEventListener("click", function () {
+//   toggleAddTodoButton();
+//   toggleTodoInput();
+// });

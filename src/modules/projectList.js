@@ -1,23 +1,14 @@
-export class ProjectList {
-  constructor() {
-    this.projects = [];
+export function createProjectList(name) {
+  return {
+    name: name,
+    projects: [],
 
-    this.addProject = (newProject) => {
+    addProject: (newProject) => {
       this.projects.push(newProject);
-    };
+    },
 
-    // this.removeProject = (oldProject) => {
-    //   this.projects.splice(this.projects.indexOf(oldProject), 1);
-    // };
-
-    // this.findProject = (project) => {
-    //   if (this.projects.includes(project)) {
-    //     return this.projects.indexOf(project);
-    //   }
-    // };
-
-    this.getAllProjects = () => {
+    getAllProjects: () => {
       this.projects.forEach((project) => console.log(project.todos));
-    };
-  }
+    },
+  };
 }
