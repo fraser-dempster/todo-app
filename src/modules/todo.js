@@ -1,4 +1,5 @@
 import { createProject } from "./project";
+import { toggleAddButton, toggleInputBox } from "./utils";
 
 const project = createProject("default");
 
@@ -28,32 +29,6 @@ function createTodo(title, description, project) {
   };
 }
 
-function focusCursorOnInput(inputId) {
-  document.getElementById(inputId).focus();
-}
-
-function setInputValueToEmptyString(inputId) {
-  document.getElementById(inputId).value = "";
-}
-
-function toggleTodoInput() {
-  const todoInputContainer = document.getElementById("todoInputContainer");
-  todoInputContainer.style.display =
-    todoInputContainer.style.display === "block" ? "none" : "block";
-
-  if (todoInputContainer.style.display === "block") {
-    focusCursorOnInput("todoInput");
-  } else {
-    setInputValueToEmptyString("todoInput");
-  }
-}
-
-function toggleAddTodoButton() {
-  const addTodoButton = document.getElementById("addTodoButton");
-  addTodoButton.style.display =
-    addTodoButton.style.display === "none" ? "block" : "none";
-}
-
 function addTodo() {
   const todoInput = document.getElementById("todoInput");
   const todoText = todoInput.value.trim();
@@ -69,43 +44,14 @@ function addTodo() {
 }
 
 document.getElementById("addTodoButton").addEventListener("click", function () {
-  toggleAddTodoButton();
-  toggleTodoInput();
+  toggleAddButton("addTodoButton");
+  toggleInputBox("todoInputContainer", "todoInput");
 });
 
 document
   .getElementById("createTodoButton")
   .addEventListener("click", function () {
     addTodo();
-    toggleAddTodoButton();
-    toggleTodoInput();
+    toggleAddButton("addTodoButton");
+    toggleInputBox("todoInputContainer", "todoInput");
   });
-// this.editDescription = (newDescription) => {
-//   this.description = newDescription;
-// };
-
-// this.editDueDate = (newDueDate) => {
-//   this.dueDate = newDueDate;
-// };
-
-// this.editPriority = (newPriority) => {
-//   this.priority = newPriority;
-// };
-
-// this.completeTodo = () => {
-//   this.completed = true;
-// };
-
-// this.incompleteTodo = () => {
-//   this.completed = false;
-// };
-
-// this.getAllInformation = () => {
-//   return {
-//     title: this.title,
-//     description: this.description,
-//     dueDate: this.dueDate,
-//     priority: this.priority,
-//     completed: this.completed,
-//   };
-// };
