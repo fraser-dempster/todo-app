@@ -15,7 +15,8 @@ export function createProject(name) {
 
     createProjectElement() {
       const projectElement = document.createElement("button");
-      projectElement.className = "projectElement";
+      projectElement.classList.add("projectElement");
+
       projectElement.textContent = this.name;
 
       return projectElement;
@@ -29,10 +30,13 @@ export function addProject(projectList) {
   const projectListElement = document.getElementById("project-list");
 
   const newProject = createProject(projectText);
-  projectList.projects.push(newProject);
-  console.log(projectList);
 
   const projectElement = newProject.createProjectElement();
+  projectList.pushToProjectList(newProject);
+
+  projectElement.addEventListener("click", function () {
+    console.log("clicked project");
+  });
 
   projectListElement.appendChild(projectElement);
 }
