@@ -14,6 +14,7 @@ function createTodo(title, description) {
     },
     createTodoElement: function () {
       const todoItem = document.createElement("div");
+      todoItem.id = this.title;
       todoItem.className = "todo-item";
       todoItem.textContent = this.title;
 
@@ -23,15 +24,13 @@ function createTodo(title, description) {
 }
 
 export function addTodo(selectedProject) {
-  const todoInput = document.getElementById("todoInput");
-  const todoText = todoInput.value.trim();
   const todoList = document.getElementById("todo-list");
+  const todoInput = document.getElementById("todoInput");
+
+  const todoText = todoInput.value.trim();
   const newTodo = createTodo(todoText, "");
+  const todoElement = newTodo.createTodoElement();
 
   selectedProject.addTodo(newTodo);
-
-  const todoElement = newTodo.createTodoElement();
   todoList.appendChild(todoElement);
-
-  selectedProject.getTodoItems();
 }
