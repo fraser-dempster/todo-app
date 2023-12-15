@@ -40,8 +40,3 @@ export function addProject(projectList) {
 
   projectListElement.appendChild(projectElement);
 }
-
-// document.getElementById("addTodoButton").addEventListener("click", function () {
-//   toggleAddTodoButton();
-//   toggleTodoInput();
-// });

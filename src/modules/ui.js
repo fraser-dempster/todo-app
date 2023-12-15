@@ -1,5 +1,7 @@
 import { addProject } from "./project";
 import { createProjectList } from "./projectList";
+import { addTodo } from "./todo";
+import { toggleAddButton, toggleInputBox } from "./utils";
 
 const projectList = createProjectList("Project list");
 const projectListElement = document.getElementById("project-list");
@@ -10,4 +12,15 @@ document
     addProject(projectList);
   });
 
-// projectList.getAllProjects();
+document.getElementById("addTodoButton").addEventListener("click", function () {
+  toggleAddButton("addTodoButton");
+  toggleInputBox("todoInputContainer", "todoInput");
+});
+
+document
+  .getElementById("createTodoButton")
+  .addEventListener("click", function () {
+    addTodo();
+    toggleAddButton("addTodoButton");
+    toggleInputBox("todoInputContainer", "todoInput");
+  });
