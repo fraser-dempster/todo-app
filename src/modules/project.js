@@ -16,6 +16,7 @@ export function createProject(name) {
     createProjectElement() {
       const projectElement = document.createElement("button");
       projectElement.classList.add("projectElement");
+      projectElement.id = name;
 
       projectElement.textContent = this.name;
 

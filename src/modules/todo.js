@@ -1,12 +1,7 @@
-import { createProject } from "./project";
-
-const project = createProject("default");
-
-function createTodo(title, description, project) {
+function createTodo(title, description) {
   return {
     title: title,
     description: description,
-    project: project,
     completed: false,
     toggleCompleted: function () {
       this.completed = !this.completed;
@@ -20,7 +15,6 @@ function createTodo(title, description, project) {
     createTodoElement: function () {
       const todoItem = document.createElement("div");
       todoItem.className = "todo-item";
-      todoItem.setAttribute("data-project", this.project.name);
       todoItem.textContent = this.title;
 
       return todoItem;
@@ -28,16 +22,16 @@ function createTodo(title, description, project) {
   };
 }
 
-export function addTodo() {
+export function addTodo(selectedProject) {
   const todoInput = document.getElementById("todoInput");
   const todoText = todoInput.value.trim();
   const todoList = document.getElementById("todo-list");
-  const newTodo = createTodo(todoText, "", project);
+  const newTodo = createTodo(todoText, "");
 
-  project.addTodo(newTodo);
+  selectedProject.addTodo(newTodo);
 
   const todoElement = newTodo.createTodoElement();
   todoList.appendChild(todoElement);
 
-  project.getTodoItems();
+  selectedProject.getTodoItems();
 }

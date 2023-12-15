@@ -1,26 +1,42 @@
-import { addProject } from "./project";
+import { addProject, createProject } from "./project";
 import { createProjectList } from "./projectList";
 import { addTodo } from "./todo";
 import { toggleAddButton, toggleInputBox } from "./utils";
 
-const projectList = createProjectList("Project list");
-const projectListElement = document.getElementById("project-list");
+export function setUpUI() {
+  const projectList = createProjectList("Project list");
+  const projectListElement = document.getElementById("project-list");
 
-document
-  .getElementById("createProjectButton")
-  .addEventListener("click", function () {
-    addProject(projectList);
-  });
+  const defaultProject = createProject("Default");
 
-document.getElementById("addTodoButton").addEventListener("click", function () {
-  toggleAddButton("addTodoButton");
-  toggleInputBox("todoInputContainer", "todoInput");
-});
+  projectListElement.appendChild(defaultProject.createProjectElement());
 
-document
-  .getElementById("createTodoButton")
-  .addEventListener("click", function () {
-    addTodo();
-    toggleAddButton("addTodoButton");
-    toggleInputBox("todoInputContainer", "todoInput");
-  });
+  projectList.pushToProjectList(defaultProject);
+
+  document
+    .getElementById(defaultProject.name)
+    .addEventListener("click", function () {
+      defaultProject.getTodoItems();
+    });
+
+  document
+    .getElementById("createProjectButton")
+    .addEventListener("click", function () {
+      addProject(projectList);
+    });
+
+  document
+    .getElementById("addTodoButton")
+    .addEventListener("click", function () {
+      toggleAddButton("addTodoButton");
+      toggleInputBox("todoInputContainer", "todoInput");
+    });
+
+  document
+    .getElementById("createTodoButton")
+    .addEventListener("click", function () {
+      addTodo(defaultProject);
+      toggleAddButton("addTodoButton");
+      toggleInputBox("todoInputContainer", "todoInput");
+    });
+}
