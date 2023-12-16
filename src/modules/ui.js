@@ -3,6 +3,8 @@ import { createProjectList } from "./projectList";
 import { addTodo } from "./todo";
 import { toggleAddButton, toggleInputBox } from "./utils";
 
+var selectedProject;
+
 export function setUpUI() {
   const projectList = createProjectList("Project list");
   const projectListElement = document.getElementById("project-list");
@@ -12,11 +14,16 @@ export function setUpUI() {
   projectListElement.appendChild(defaultProject.createProjectElement());
 
   projectList.pushToProjectList(defaultProject);
+  // selectedProject = defaultProject;
+
+  selectedProject = projectList.findProjectByName("Default");
 
   document
-    .getElementById(defaultProject.name)
-    .addEventListener("click", function () {
-      defaultProject.getTodoItems();
+    .getElementById("project-list")
+    .addEventListener("click", function (e) {
+      selectedProject = projectList.findProjectByName(e.target.id);
+      console.log(selectedProject.getTodoItems());
+      // projectList.selectedProject = e.target;
     });
 
   document
@@ -35,7 +42,7 @@ export function setUpUI() {
   document
     .getElementById("createTodoButton")
     .addEventListener("click", function () {
-      addTodo(defaultProject);
+      addTodo(selectedProject);
       toggleAddButton("addTodoButton");
       toggleInputBox("todoInputContainer", "todoInput");
     });

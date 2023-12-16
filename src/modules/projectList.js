@@ -5,9 +5,18 @@ export function createProjectList(name) {
     pushToProjectList(newProject) {
       this.projects.push(newProject);
     },
-
-    getAllProjects() {
-      this.getProjects.forEach((project) => console.log(project.todos));
+    findProjectByName(name) {
+      let project;
+      this.projects.forEach((item) => {
+        if (item.name === name) {
+          project = item;
+        }
+      });
+      return project;
     },
+
+    // getAllProjects() {
+    //   this.getProjects.forEach((project) => console.log(project.todos));
+    // },
   };
 }

@@ -35,9 +35,9 @@ export function addProject(projectList) {
   const projectElement = newProject.createProjectElement();
   projectList.pushToProjectList(newProject);
 
-  projectElement.addEventListener("click", function () {
-    console.log("clicked project");
-  });
+  // projectElement.addEventListener("click", function () {
+  //   console.log("clicked project");
+  // });
 
   projectListElement.appendChild(projectElement);
 }
