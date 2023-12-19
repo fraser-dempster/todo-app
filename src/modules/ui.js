@@ -4,9 +4,9 @@ import { addTodo } from "./todo";
 import { toggleAddButton, toggleInputBox } from "./utils";
 
 var selectedProject;
+const projectList = createProjectList("Project list");
 
 export function setUpUI() {
-  const projectList = createProjectList("Project list");
   const projectListElement = document.getElementById("project-list");
 
   const defaultProject = createProject("Default");
@@ -22,7 +22,7 @@ export function setUpUI() {
     .getElementById("project-list")
     .addEventListener("click", function (e) {
       selectedProject = projectList.findProjectByName(e.target.id);
-      console.log(selectedProject.getTodoItems());
+      displayTodos(e.target.id);
       // projectList.selectedProject = e.target;
     });
 
@@ -46,4 +46,28 @@ export function setUpUI() {
       toggleAddButton("addTodoButton");
       toggleInputBox("todoInputContainer", "todoInput");
     });
+}
+
+export function displayTodos(projectName) {
+  const allProjects = projectList.projects;
+  if (projectList.findProjectByName(projectName) === selectedProject) {
+    selectedProject = projectList.findProjectByName(projectName);
+    let todoItems = selectedProject.getTodoItems();
+
+    for (let i = 0; i <= todoItems.length - 1; i++) {
+      const todoItem = document.getElementById(todoItems[i].title);
+      todoItem.style.display = "block";
+    }
+  }
+
+  for (let i = 0; i <= allProjects.length - 1; i++) {
+    if (allProjects[i] !== selectedProject) {
+      const todoItems = allProjects[i].getTodoItems();
+
+      for (let i = 0; i <= todoItems.length - 1; i++) {
+        const todoItem = document.getElementById(todoItems[i].title);
+        todoItem.style.display = "none";
+      }
+    }
+  }
 }

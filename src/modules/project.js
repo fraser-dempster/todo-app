@@ -44,4 +44,6 @@ export function addProject(projectList) {
   projectList.pushToProjectList(newProject);
 
   projectListElement.appendChild(projectElement);
+
+  projectElement.click();
 }
