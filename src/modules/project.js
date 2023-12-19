@@ -8,9 +8,17 @@ export function createProject(name) {
     },
 
     getTodoItems() {
-      this.todos.forEach((element) => {
-        console.log(element.title);
+      return this.todos;
+    },
+
+    findTodoByName(name) {
+      let todo;
+      this.todos.forEach((item) => {
+        if (item.name === name) {
+          todo = item;
+        }
       });
+      return todo;
     },
 
     createProjectElement() {
@@ -34,10 +42,6 @@ export function addProject(projectList) {
 
   const projectElement = newProject.createProjectElement();
   projectList.pushToProjectList(newProject);
-
-  // projectElement.addEventListener("click", function () {
-  //   console.log("clicked project");
-  // });
 
   projectListElement.appendChild(projectElement);
 }
