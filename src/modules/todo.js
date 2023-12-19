@@ -1,7 +1,8 @@
-function createTodo(title, description) {
+function createTodo(title, description, dueDate) {
   return {
     title: title,
     description: description,
+    dueDate: dueDate,
     completed: false,
     toggleCompleted: function () {
       this.completed = !this.completed;
@@ -12,15 +13,34 @@ function createTodo(title, description) {
     editDescription: function (newDescription) {
       this.description = newDescription;
     },
-    createTodoElement: function () {
-      const todoItem = document.createElement("div");
-      todoItem.id = this.title;
-      todoItem.className = "todo-item";
-      todoItem.textContent = this.title;
+    // createTodoElement: function () {
+    //   const todoItem = document.createElement("div");
+    //   todoItem.id = this.title;
+    //   todoItem.className = "todo-item";
+    //   todoItem.textContent = this.title;
 
-      return todoItem;
-    },
+    //   return todoItem;
+    // },
   };
+}
+
+export function createTodoElementTemplate(
+  title,
+  description,
+  dueDate,
+  completed
+) {
+  return `
+  <div id=${title} class="todo-item">
+    <div class="todo-info">
+      <div class="todo-title">${title}</div>
+      <div class="todo-description">${description}
+      <div class="due-date">Due Date: ${dueDate}</div>
+      <dic class="completed">Completed: ${completed}</div>
+    </div>
+    <button class="edit-button">Edit</button>
+  </div>
+`;
 }
 
 export function addTodo(selectedProject) {
@@ -29,8 +49,13 @@ export function addTodo(selectedProject) {
 
   const todoText = todoInput.value.trim();
   const newTodo = createTodo(todoText, "");
-  const todoElement = newTodo.createTodoElement();
+  const todoElement = createTodoElementTemplate(
+    todoText,
+    newTodo.description,
+    newTodo.dueDate,
+    newTodo.completed
+  );
+  todoList.innerHTML += todoElement;
 
   selectedProject.addTodo(newTodo);
-  todoList.appendChild(todoElement);
 }

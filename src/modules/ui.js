@@ -1,6 +1,6 @@
 import { addProject, createProject } from "./project";
 import { createProjectList } from "./projectList";
-import { addTodo } from "./todo";
+import { addTodo, createTodoElementTemplate } from "./todo";
 import { toggleAddButton, toggleInputBox } from "./utils";
 
 var selectedProject;
@@ -14,16 +14,15 @@ export function setUpUI() {
   projectListElement.appendChild(defaultProject.createProjectElement());
 
   projectList.pushToProjectList(defaultProject);
-  // selectedProject = defaultProject;
 
   selectedProject = projectList.findProjectByName("Default");
 
   document
     .getElementById("project-list")
     .addEventListener("click", function (e) {
+      clearTodoList();
       selectedProject = projectList.findProjectByName(e.target.id);
       displayTodos(e.target.id);
-      // projectList.selectedProject = e.target;
     });
 
   document
@@ -50,24 +49,23 @@ export function setUpUI() {
 
 export function displayTodos(projectName) {
   const allProjects = projectList.projects;
+
   if (projectList.findProjectByName(projectName) === selectedProject) {
     selectedProject = projectList.findProjectByName(projectName);
     let todoItems = selectedProject.getTodoItems();
 
-    for (let i = 0; i <= todoItems.length - 1; i++) {
-      const todoItem = document.getElementById(todoItems[i].title);
-      todoItem.style.display = "block";
-    }
+    todoItems.map((item) => {
+      const todoElement = createTodoElementTemplate(
+        item.title,
+        item.description,
+        item.dueDate,
+        item.completed
+      );
+      document.getElementById("todo-list").innerHTML += todoElement;
+    });
   }
+}
 
-  for (let i = 0; i <= allProjects.length - 1; i++) {
-    if (allProjects[i] !== selectedProject) {
-      const todoItems = allProjects[i].getTodoItems();
-
-      for (let i = 0; i <= todoItems.length - 1; i++) {
-        const todoItem = document.getElementById(todoItems[i].title);
-        todoItem.style.display = "none";
-      }
-    }
-  }
+function clearTodoList() {
+  document.getElementById("todo-list").innerHTML = "";
 }

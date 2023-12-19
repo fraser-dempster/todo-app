@@ -47,12 +47,20 @@ input[type="reset"] {
 
 .content-grid {
   grid-area: content-grid;
-  background-color: pink;
+  background-color: azure;
+}
+
+.todo-list {
+  background-color: bisque;
 }
 
 .todo-item {
-  width: 200px;
-  height: 50px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .projectElement {
