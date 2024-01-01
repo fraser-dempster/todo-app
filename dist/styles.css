@@ -1,3 +1,12 @@
+:root {
+  --primary-color: #3498db; /* Main color */
+  --dark-shade: #1f618d; /* Darker shade */
+  --light-shade: #7fb3d5; /* Lighter shade */
+  --lightest-shade: #c6e2ff; /* Lightest shade */
+  --text-color: #333; /* Text color (black or dark gray) */
+  --background-color: #f8f8f8; /* Background color */
+}
+
 html,
 body {
   margin: 0;
@@ -34,12 +43,12 @@ input[type="reset"] {
 
 .navbar {
   grid-area: navbar;
-  background-color: cadetblue;
+  background-color: var(--primary-color);
 }
 
 .sidebar {
   grid-area: sidebar;
-  background-color: white;
+  background-color: var(--light-shade);
 
   display: flex;
   flex-direction: column;
@@ -48,7 +57,7 @@ input[type="reset"] {
 
 .content-grid {
   grid-area: content-grid;
-  background-color: azure;
+  background-color: var(--lightest-shade);
 }
 
 .todo-list {
@@ -120,8 +129,8 @@ input[type="reset"] {
 
 .addButton {
   display: inline-block;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--background-color);
+  color: var(--dark-shade);
   border: solid 1px #000;
   padding: 10px 15px;
   font-size: 16px;
@@ -131,8 +140,8 @@ input[type="reset"] {
 }
 
 .addButton:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--dark-shade);
+  color: var(--background-color);
 }
 
 .todoInput {
