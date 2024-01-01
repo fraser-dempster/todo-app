@@ -23,14 +23,17 @@ export function addTodo(selectedProject) {
   const todoInput = document.getElementById("todoInput");
 
   const todoText = todoInput.value.trim();
-  const newTodo = createTodo(todoText, "");
-  const todoElement = createTodoElementTemplate(
-    todoText,
-    newTodo.description,
-    newTodo.dueDate,
-    newTodo.completed
-  );
-  todoList.innerHTML += todoElement;
 
-  selectedProject.addTodo(newTodo);
+  if (todoText) {
+    const newTodo = createTodo(todoText, "");
+    const todoElement = createTodoElementTemplate(
+      todoText,
+      newTodo.description,
+      newTodo.dueDate,
+      newTodo.completed
+    );
+    todoList.innerHTML += todoElement;
+
+    selectedProject.addTodo(newTodo);
+  }
 }
