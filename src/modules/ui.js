@@ -1,6 +1,6 @@
 import { addProject, createProject } from "./project";
 import { createProjectList } from "./projectList";
-import { addTodo, createTodoElementTemplate } from "./todo";
+import { addTodo } from "./todo";
 import { toggleAddButton, toggleInputBox } from "./utils";
 
 var selectedProject;
@@ -42,6 +42,13 @@ export function setUpUI() {
     .getElementById("createTodoButton")
     .addEventListener("click", function () {
       addTodo(selectedProject);
+      toggleAddButton("addTodoButton");
+      toggleInputBox("todoInputContainer", "todoInput");
+    });
+
+  document
+    .getElementById("cancelAddTodo")
+    .addEventListener("click", function () {
       toggleAddButton("addTodoButton");
       toggleInputBox("todoInputContainer", "todoInput");
     });

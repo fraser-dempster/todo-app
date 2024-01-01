@@ -28,10 +28,15 @@
       </div>
 
       <div id="content-grid" class="content-grid">
-        <button class="addButton" id="addTodoButton">+</button>
+        <button class="addButton" id="addTodoButton">Add Task</button>
         <div class="todoInputContainer" id="todoInputContainer">
-          <input type="text" id="todoInput" placeholder="Enter your todo" />
-          <button id="createTodoButton">Create Todo</button>
+          <div class="addTodoContainer">
+            <input type="text" id="todoInput" placeholder="Enter task" />
+            <div class="button-row">
+              <button class="addButton" id="createTodoButton">Add</button>
+              <button class="addButton" id="cancelAddTodo">Cancel</button>
+            </div>
+          </div>
         </div>
         <div id="todo-list" class="todo-list"></div>
       </div>
