@@ -1,3 +1,5 @@
+import { createTodoElementTemplate } from "./ui";
+
 function createTodo(title, description, dueDate) {
   return {
     title: title,
@@ -13,34 +15,7 @@ function createTodo(title, description, dueDate) {
     editDescription: function (newDescription) {
       this.description = newDescription;
     },
-    // createTodoElement: function () {
-    //   const todoItem = document.createElement("div");
-    //   todoItem.id = this.title;
-    //   todoItem.className = "todo-item";
-    //   todoItem.textContent = this.title;
-
-    //   return todoItem;
-    // },
   };
-}
-
-export function createTodoElementTemplate(
-  title,
-  description,
-  dueDate,
-  completed
-) {
-  return `
-  <div id=${title} class="todo-item">
-    <div class="todo-info">
-      <div class="todo-title">${title}</div>
-      <div class="todo-description">${description}
-      <div class="due-date">Due Date: ${dueDate}</div>
-      <dic class="completed">Completed: ${completed}</div>
-    </div>
-    <button class="edit-button">Edit</button>
-  </div>
-`;
 }
 
 export function addTodo(selectedProject) {

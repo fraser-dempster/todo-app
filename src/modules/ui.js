@@ -48,8 +48,6 @@ export function setUpUI() {
 }
 
 export function displayTodos(projectName) {
-  const allProjects = projectList.projects;
-
   if (projectList.findProjectByName(projectName) === selectedProject) {
     selectedProject = projectList.findProjectByName(projectName);
     let todoItems = selectedProject.getTodoItems();
@@ -68,4 +66,21 @@ export function displayTodos(projectName) {
 
 function clearTodoList() {
   document.getElementById("todo-list").innerHTML = "";
+}
+
+export function createTodoElementTemplate(
+  title,
+  description,
+  dueDate,
+  completed
+) {
+  return `
+  <div id=${title} class="todo-item">
+    <div class="todo-title">${title}</div>
+    <div class="todo-description">${description}
+    <div class="due-date">Due Date: ${dueDate}</div>
+    <dic class="completed">Completed: ${completed}</div>
+    <button class="edit-button">Edit</button>
+  </div>
+`;
 }
