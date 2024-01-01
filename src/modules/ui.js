@@ -39,6 +39,16 @@ export function setUpUI() {
     });
 
   document
+    .getElementById("todoInput")
+    .addEventListener("keyup", function (event) {
+      if (event.key === "Enter") {
+        addTodo(selectedProject);
+        toggleAddButton("addTodoButton");
+        toggleInputBox("todoInputContainer", "todoInput");
+      }
+    });
+
+  document
     .getElementById("createTodoButton")
     .addEventListener("click", function () {
       addTodo(selectedProject);
