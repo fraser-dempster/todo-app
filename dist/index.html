@@ -8,10 +8,12 @@
   </head>
   <body>
     <div id="grid-container" class="grid-container">
-      <nav id="navbar" class="navbar"></nav>
+      <nav id="navbar" class="navbar">
+        <h1>Todo List</h1>
+      </nav>
 
       <div id="sidebar" class="sidebar">
-        <h3>Projects</h3>
+        <h2>Projects</h2>
 
         <div class="projectInputContainer" id="projectInputContainer">
           <input
@@ -28,6 +30,7 @@
       </div>
 
       <div id="content-grid" class="content-grid">
+        <div id="todo-list" class="todo-list"></div>
         <button class="addButton" id="addTodoButton">Add Task</button>
         <div class="todoInputContainer" id="todoInputContainer">
           <div class="addTodoContainer">
@@ -38,9 +41,7 @@
             </div>
           </div>
         </div>
-        <div id="todo-list" class="todo-list"></div>
       </div>
     </div>
-    <!-- <div id="content-container" class="content-container" id="content"></div> -->
   </body>
 </html>
