@@ -52,6 +52,7 @@ input {
 }
 
 .navbar {
+  padding: 20px;
   width: 100%;
   overflow: auto;
   grid-area: navbar;
@@ -145,6 +146,7 @@ input {
 }
 
 .projectElement {
+  line-height: 3rem;
   background-color: #fff;
   border: 1px solid;
   border-radius: 8px;
@@ -157,12 +159,14 @@ input {
 }
 
 .projectElement:focus {
-  background-color: grey;
+  background-color: #000;
+  color: #fff;
 }
 
 .projectElement:hover {
-  background-color: grey;
-  /* transform: scale(1.2); */
+  background-color: #000;
+  color: #fff;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .todoInputContainer {
