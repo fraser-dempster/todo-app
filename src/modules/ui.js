@@ -45,6 +45,23 @@ export function setUpUI() {
     });
 
   document
+    .getElementById("content-grid")
+    .addEventListener("click", function (event) {
+      const targetTodoItem = event.target.closest(".todo-item");
+
+      if (targetTodoItem) {
+        const todoItem = selectedProject.findTodoByName(targetTodoItem.id);
+        const myModal = document.getElementById("myModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDescription = document.getElementById("modalDescription");
+
+        modalTitle.textContent = todoItem.title;
+        modalDescription.textContent = "Description " + todoItem.description;
+        myModal.style.display = "flex";
+      }
+    });
+
+  document
     .getElementById("addTodoButton")
     .addEventListener("click", function () {
       toggleAddButton("addTodoButton");
@@ -89,6 +106,13 @@ export function setUpUI() {
       toggleAddButton("addProjectButton");
       toggleInputBox("projectInputContainer", "projectInput");
     });
+
+  window.addEventListener("click", function (event) {
+    const myModel = document.getElementById("myModal");
+    if (event.target === myModel) {
+      myModel.style.display = "none";
+    }
+  });
 }
 
 export function displayTodos(projectName) {
@@ -121,10 +145,8 @@ export function createTodoElementTemplate(
   return `
   <div id=${title} class="todo-item">
     <div class="todo-title">${title}</div>
-    <div class="todo-description">${description}
     <div class="due-date">Due Date: ${dueDate}</div>
     <dic class="completed">Completed: ${completed}</div>
-    <button class="edit-button">Edit</button>
   </div>
 `;
 }

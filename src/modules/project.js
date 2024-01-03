@@ -16,7 +16,7 @@ export function createProject(name) {
     findTodoByName(name) {
       let todo;
       this.todos.forEach((item) => {
-        if (item.name === name) {
+        if (item.title === name) {
           todo = item;
         }
       });
