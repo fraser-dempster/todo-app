@@ -10,8 +10,9 @@ export function setUpUI() {
   const projectListElement = document.getElementById("project-list");
 
   const defaultProject = createProject("Default");
+  const defaultProjectElement = defaultProject.createProjectElement();
 
-  projectListElement.appendChild(defaultProject.createProjectElement());
+  projectListElement.appendChild(defaultProjectElement);
 
   projectList.pushToProjectList(defaultProject);
 
@@ -29,6 +30,18 @@ export function setUpUI() {
     .getElementById("createProjectButton")
     .addEventListener("click", function () {
       addProject(projectList);
+      toggleAddButton("addProjectButton");
+      toggleInputBox("projectInputContainer", "projectInput");
+    });
+
+  document
+    .getElementById("projectInput")
+    .addEventListener("keyup", function (event) {
+      if (event.key === "Enter") {
+        addProject(projectList);
+        toggleAddButton("addProjectButton");
+        toggleInputBox("projectInputContainer", "projectInput");
+      }
     });
 
   document
@@ -36,6 +49,13 @@ export function setUpUI() {
     .addEventListener("click", function () {
       toggleAddButton("addTodoButton");
       toggleInputBox("todoInputContainer", "todoInput");
+    });
+
+  document
+    .getElementById("addProjectButton")
+    .addEventListener("click", function () {
+      toggleAddButton("addProjectButton");
+      toggleInputBox("projectInputContainer", "projectInput");
     });
 
   document
@@ -61,6 +81,13 @@ export function setUpUI() {
     .addEventListener("click", function () {
       toggleAddButton("addTodoButton");
       toggleInputBox("todoInputContainer", "todoInput");
+    });
+
+  document
+    .getElementById("cancelAddProject")
+    .addEventListener("click", function () {
+      toggleAddButton("addProjectButton");
+      toggleInputBox("projectInputContainer", "projectInput");
     });
 }
 

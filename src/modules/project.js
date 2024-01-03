@@ -38,12 +38,15 @@ export function addProject(projectList) {
   const projectText = projectInput.value.trim();
   const projectListElement = document.getElementById("project-list");
 
-  const newProject = createProject(projectText);
+  if (projectText) {
+    const newProject = createProject(projectText);
 
-  const projectElement = newProject.createProjectElement();
-  projectList.pushToProjectList(newProject);
+    const projectElement = newProject.createProjectElement();
+    projectList.pushToProjectList(newProject);
 
-  projectListElement.appendChild(projectElement);
+    projectListElement.appendChild(projectElement);
 
-  projectElement.click();
+    projectElement.click();
+    projectElement.focus();
+  }
 }

@@ -14,9 +14,5 @@ export function createProjectList(name) {
       });
       return project;
     },
-
-    // getAllProjects() {
-    //   this.getProjects.forEach((project) => console.log(project.todos));
-    // },
   };
 }

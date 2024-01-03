@@ -15,18 +15,21 @@
       <div id="sidebar" class="sidebar">
         <h2>Projects</h2>
 
-        <div class="projectInputContainer" id="projectInputContainer">
-          <input
-            type="text"
-            id="projectInput"
-            placeholder="Enter your project"
-          />
-          <button id="createProjectButton">Create Project</button>
-        </div>
-
         <div id="project-list" class="project-list"></div>
-
-        <button id="add-project-button" class="addButton">+</button>
+        <button class="addButton" id="addProjectButton">Add Project</button>
+        <div class="projectInputContainer" id="projectInputContainer">
+          <div class="addProjectContainer" id="addProjectContainer">
+            <input
+              type="text"
+              id="projectInput"
+              placeholder="Enter your project"
+            />
+            <div class="button-row">
+              <button id="createProjectButton" class="addButton">Add</button>
+              <button class="addButton" id="cancelAddProject">Cancel</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id="content-grid" class="content-grid">

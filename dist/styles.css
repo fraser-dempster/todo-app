@@ -47,7 +47,7 @@ input {
     "navbar navbar"
     "sidebar content-grid"
     "sidebar content-grid";
-  grid-template-columns: 0.5fr 2fr;
+  grid-template-columns: 300px 2fr;
   grid-template-rows: 100px 1fr 1fr;
 }
 
@@ -65,6 +65,19 @@ input {
   display: flex;
   flex-direction: column;
   padding: 0px 20px 0px 20px;
+}
+
+.projectInputContainer {
+  display: none;
+}
+
+.addProjectContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 20px;
+  gap: 10px;
+  background-color: var(--lightest-shade);
 }
 
 .content-grid {
@@ -101,15 +114,6 @@ input {
   gap: 10px;
 }
 
-/* .todo-item {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-} */
-
 .todo-item {
   background-color: #fff;
   border-radius: 8px;
@@ -141,14 +145,15 @@ input {
 }
 
 .projectElement {
+  background-color: #fff;
   border: 1px solid;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   padding: 20px 0px 10px 0px;
+  margin-bottom: 20px;
   font-size: 1.5rem;
   cursor: pointer;
-
-  display: flex;
-  align-items: center;
 }
 
 .projectElement:focus {
@@ -157,7 +162,7 @@ input {
 
 .projectElement:hover {
   background-color: grey;
-  transform: scale(1.2);
+  /* transform: scale(1.2); */
 }
 
 .todoInputContainer {
