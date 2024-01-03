@@ -128,3 +128,9 @@ export function createTodoElementTemplate(
   </div>
 `;
 }
+
+export function createErrorElementTemplate(errorName) {
+  return `
+    <div style="color:red" id=${errorName}>${errorName}</div>
+    `;
+}

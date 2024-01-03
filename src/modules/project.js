@@ -1,3 +1,5 @@
+import { createErrorElementTemplate } from "./ui";
+
 export function createProject(name) {
   return {
     name: name,
@@ -36,9 +38,18 @@ export function createProject(name) {
 export function addProject(projectList) {
   const projectInput = document.getElementById("projectInput");
   const projectText = projectInput.value.trim();
+  let projectExists = false;
   const projectListElement = document.getElementById("project-list");
+  const sidebarElement = document.getElementById("sidebar");
 
-  if (projectText) {
+  for (let i = 0; i <= projectList.projects.length - 1; i++) {
+    if (projectList.projects[i].name === projectText) {
+      projectExists = true;
+    }
+  }
+  const errorElement = createErrorElementTemplate("Can't have two projects");
+
+  if (projectText && !projectExists) {
     const newProject = createProject(projectText);
 
     const projectElement = newProject.createProjectElement();
@@ -48,5 +59,8 @@ export function addProject(projectList) {
 
     projectElement.click();
     projectElement.focus();
+  } else {
+    // sidebarElement.innerHTML += errorElement;
+    alert("You can't add a project that already exists!");
   }
 }

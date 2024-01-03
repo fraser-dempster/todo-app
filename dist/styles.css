@@ -146,7 +146,8 @@ input {
 }
 
 .projectElement {
-  line-height: 3rem;
+  height: 4rem;
+  line-height: -4rem;
   background-color: #fff;
   border: 1px solid;
   border-radius: 8px;
