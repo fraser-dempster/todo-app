@@ -49,7 +49,7 @@ export function setUpUI() {
     .addEventListener("click", function (event) {
       const targetTodoItem = event.target.closest(".todo-item");
 
-      if (targetTodoItem) {
+      if (targetTodoItem && event.target.type !== "checkbox") {
         const todoItem = selectedProject.findTodoByName(targetTodoItem.id);
         const myModal = document.getElementById("myModal");
         const modalTitle = document.getElementById("modalTitle");
@@ -58,6 +58,26 @@ export function setUpUI() {
         modalTitle.textContent = todoItem.title;
         modalDescription.textContent = "Description " + todoItem.description;
         myModal.style.display = "flex";
+      }
+    });
+
+  document
+    .getElementById("content-grid")
+    .addEventListener("click", function (event) {
+      const targetTodoItem = event.target.closest(".todo-item");
+
+      if (targetTodoItem && event.target.type === "checkbox") {
+        const completedText =
+          targetTodoItem.getElementsByClassName("completed")[0];
+        const todoItem = selectedProject.findTodoByName(targetTodoItem.id);
+
+        todoItem.toggleCompleted();
+
+        if (todoItem.completed === false) {
+          targetTodoItem.style.backgroundColor = "#ff8080";
+        } else if (todoItem.completed === true) {
+          targetTodoItem.style.backgroundColor = "#80ff80";
+        }
       }
     });
 
@@ -136,19 +156,22 @@ function clearTodoList() {
   document.getElementById("todo-list").innerHTML = "";
 }
 
-export function createTodoElementTemplate(
-  title,
-  description,
-  dueDate,
-  completed
-) {
-  return `
-  <div id=${title} class="todo-item">
+export function createTodoElementTemplate(title, dueDate, completed) {
+  const todoItem = document.createElement("div");
+
+  todoItem.innerHTML += `
+  <div style="background-color: #ff8080" id=${title} class="todo-item">
     <div class="todo-title">${title}</div>
     <div class="due-date">Due Date: ${dueDate}</div>
-    <dic class="completed">Completed: ${completed}</div>
+    <label class="switch">
+      <div class="completed" id="completed"></div> 
+      <input class="regular-checkbox" type="checkbox" id="toggleCompleted">
+      <span class="slider round"></span>
+  </label>
   </div>
 `;
+
+  return todoItem;
 }
 
 export function createErrorElementTemplate(errorName) {

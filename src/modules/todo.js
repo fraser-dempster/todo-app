@@ -1,11 +1,12 @@
 import { createTodoElementTemplate } from "./ui";
 
-function createTodo(title, description, dueDate) {
+function createTodo(title, description, dueDate, priority) {
   return {
     title: title,
     description: description,
     dueDate: dueDate,
     completed: false,
+    priority,
     toggleCompleted: function () {
       this.completed = !this.completed;
     },
@@ -21,6 +22,7 @@ function createTodo(title, description, dueDate) {
 export function addTodo(selectedProject) {
   const todoList = document.getElementById("todo-list");
   const todoInput = document.getElementById("todoInput");
+  const fragment = document.createDocumentFragment();
 
   const todoText = todoInput.value.trim();
 
@@ -30,9 +32,11 @@ export function addTodo(selectedProject) {
       todoText,
       newTodo.description,
       newTodo.dueDate,
-      newTodo.completed
+      newTodo.completed,
+      newTodo.priority
     );
-    todoList.innerHTML += todoElement;
+    fragment.appendChild(todoElement);
+    todoList.appendChild(fragment);
 
     selectedProject.addTodo(newTodo);
   }
