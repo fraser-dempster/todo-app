@@ -52,8 +52,15 @@ export function setUpUI() {
       if (targetTodoItem && event.target.type !== "checkbox") {
         const todoItem = selectedProject.findTodoByName(targetTodoItem.id);
         const myModal = document.getElementById("myModal");
+        // const myModalContent = document.getElementById("modal-content");
         const modalTitle = document.getElementById("modalTitle");
         const modalDescription = document.getElementById("modalDescription");
+
+        // if (todoItem.completed === false) {
+        //   myModalContent.style.backgroundColor = "#ff8080";
+        // } else if (todoItem.completed === true) {
+        //   myModalContent.style.backgroundColor = "#80ff80";
+        // }
 
         modalTitle.textContent = todoItem.title;
         modalDescription.textContent = "Description " + todoItem.description;
