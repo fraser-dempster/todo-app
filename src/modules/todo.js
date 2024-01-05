@@ -16,6 +16,9 @@ function createTodo(title, description, dueDate, priority) {
     editDescription: function (newDescription) {
       this.description = newDescription;
     },
+    setDueDate: function (newDate) {
+      this.dueDate = newDate;
+    },
   };
 }
 

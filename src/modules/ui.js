@@ -2,6 +2,7 @@ import { addProject, createProject } from "./project";
 import { createProjectList } from "./projectList";
 import { addTodo } from "./todo";
 import { toggleAddButton, toggleInputBox } from "./utils";
+import { format } from "date-fns";
 
 var selectedProject;
 const projectList = createProjectList("Project list");
@@ -48,19 +49,11 @@ export function setUpUI() {
     .getElementById("content-grid")
     .addEventListener("click", function (event) {
       const targetTodoItem = event.target.closest(".todo-item");
-
       if (targetTodoItem && event.target.type !== "checkbox") {
         const todoItem = selectedProject.findTodoByName(targetTodoItem.id);
         const myModal = document.getElementById("myModal");
-        // const myModalContent = document.getElementById("modal-content");
         const modalTitle = document.getElementById("modalTitle");
         const modalDescription = document.getElementById("modalDescription");
-
-        // if (todoItem.completed === false) {
-        //   myModalContent.style.backgroundColor = "#ff8080";
-        // } else if (todoItem.completed === true) {
-        //   myModalContent.style.backgroundColor = "#80ff80";
-        // }
 
         modalTitle.textContent = todoItem.title;
         modalDescription.textContent = "Description " + todoItem.description;
@@ -74,8 +67,6 @@ export function setUpUI() {
       const targetTodoItem = event.target.closest(".todo-item");
 
       if (targetTodoItem && event.target.type === "checkbox") {
-        const completedText =
-          targetTodoItem.getElementsByClassName("completed")[0];
         const todoItem = selectedProject.findTodoByName(targetTodoItem.id);
 
         todoItem.toggleCompleted();
@@ -87,6 +78,39 @@ export function setUpUI() {
         }
       }
     });
+
+  document.getElementById("set-date").addEventListener("click", function () {
+    const modalElement = document.getElementById("modal-content");
+    const todoItemElement = document.getElementById(modalTitle.textContent);
+    const todoItem = selectedProject.findTodoByName(modalTitle.textContent);
+    const dateDisplay = todoItemElement.getElementsByClassName("date")[0];
+
+    if (modalElement.getElementsByClassName("due-date")[0].value) {
+      console.log(modalElement.getElementsByClassName("due-date")[0].value);
+      todoItem.setDueDate(
+        modalElement.getElementsByClassName("due-date")[0].value
+      );
+
+      if (
+        format(
+          modalElement.getElementsByClassName("due-date")[0].value,
+          "yyyy"
+        ) !== new Date().getFullYear().toString()
+      ) {
+        dateDisplay.innerHTML = "";
+        dateDisplay.innerHTML +=
+          format(todoItem.dueDate, "dd") +
+          format(todoItem.dueDate, " MMM") +
+          format(todoItem.dueDate, " yyyy");
+      } else {
+        dateDisplay.innerHTML = "";
+        dateDisplay.innerHTML +=
+          format(todoItem.dueDate, "dd") + format(todoItem.dueDate, " MMM");
+      }
+    } else {
+      alert("Please select a date");
+    }
+  });
 
   document
     .getElementById("addTodoButton")
@@ -136,6 +160,7 @@ export function setUpUI() {
 
   window.addEventListener("click", function (event) {
     const myModel = document.getElementById("myModal");
+
     if (event.target === myModel) {
       myModel.style.display = "none";
     }
@@ -169,7 +194,7 @@ export function createTodoElementTemplate(title, dueDate, completed) {
   todoItem.innerHTML += `
   <div style="background-color: #ff8080" id=${title} class="todo-item">
     <div class="todo-title">${title}</div>
-    <div class="due-date">Due Date: ${dueDate}</div>
+    <div id="date" class="date"></div>
     <label class="switch">
       <div class="completed" id="completed"></div> 
       <input class="regular-checkbox" type="checkbox" id="toggleCompleted">
