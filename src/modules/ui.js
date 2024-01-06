@@ -189,7 +189,6 @@ function formatDate(dueDate) {
     dueDate &&
     format(dueDate, "yyyy") === new Date().getFullYear().toString()
   ) {
-    console.log("formatted");
     return format(dueDate, "dd") + format(dueDate, " MMM");
   } else if (
     dueDate &&
@@ -199,8 +198,7 @@ function formatDate(dueDate) {
       format(dueDate, "dd") + format(dueDate, " MMM") + format(dueDate, " yyyy")
     );
   } else {
-    console.log("lol");
-    return dueDate;
+    return "";
   }
 }
 
