@@ -34,14 +34,12 @@ export function addTodo(selectedProject) {
 
   if (todoText) {
     const newTodo = createTodo(todoText);
-    console.log(newTodo);
     const todoElement = createTodoElementTemplate(
       todoText,
       newTodo.description,
       numberOfTodos
     );
 
-    console.log(todoElement);
     fragment.appendChild(todoElement);
     todoList.appendChild(fragment);
 

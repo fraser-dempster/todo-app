@@ -188,7 +188,6 @@ export function displayTodos(projectName) {
   if (projectList.findProjectByID(projectName) === selectedProject) {
     selectedProject = projectList.findProjectByID(projectName);
     let todoItems = selectedProject.getTodoItems();
-    console.log(todoItems);
 
     todoItems.map((item) => {
       const todoElement = createTodoElementTemplate(
