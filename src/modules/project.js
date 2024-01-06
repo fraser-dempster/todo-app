@@ -1,9 +1,12 @@
 import { createErrorElementTemplate } from "./ui";
 
+var numberOfProjects = 0;
+
 export function createProject(name) {
   return {
     name: name,
     todos: [],
+    id: numberOfProjects,
 
     addTodo(todo) {
       this.todos.push(todo);
@@ -26,8 +29,8 @@ export function createProject(name) {
     createProjectElement() {
       const projectElement = document.createElement("button");
       projectElement.classList.add("projectElement");
-      projectElement.id = name;
-
+      projectElement.id = numberOfProjects;
+      numberOfProjects += 1;
       projectElement.textContent = this.name;
 
       return projectElement;

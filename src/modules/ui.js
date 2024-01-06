@@ -17,13 +17,13 @@ export function setUpUI() {
 
   projectList.pushToProjectList(defaultProject);
 
-  selectedProject = projectList.findProjectByName("Default");
+  selectedProject = projectList.findProjectByID(0);
 
   document
     .getElementById("project-list")
     .addEventListener("click", function (e) {
       clearTodoList();
-      selectedProject = projectList.findProjectByName(e.target.id);
+      selectedProject = projectList.findProjectByID(e.target.id);
       displayTodos(e.target.id);
     });
 
@@ -168,18 +168,13 @@ export function setUpUI() {
 }
 
 export function displayTodos(projectName) {
-  if (projectList.findProjectByName(projectName) === selectedProject) {
-    selectedProject = projectList.findProjectByName(projectName);
+  if (projectList.findProjectByID(projectName) === selectedProject) {
+    selectedProject = projectList.findProjectByID(projectName);
     let todoItems = selectedProject.getTodoItems();
 
     todoItems.map((item) => {
-      const todoElement = createTodoElementTemplate(
-        item.title,
-        item.description,
-        item.dueDate,
-        item.completed
-      );
-      document.getElementById("todo-list").innerHTML += todoElement;
+      const todoElement = createTodoElementTemplate(item.title);
+      document.getElementById("todo-list").innerHTML += todoElement.innerHTML;
     });
   }
 }
@@ -188,7 +183,7 @@ function clearTodoList() {
   document.getElementById("todo-list").innerHTML = "";
 }
 
-export function createTodoElementTemplate(title, dueDate, completed) {
+export function createTodoElementTemplate(title) {
   const todoItem = document.createElement("div");
 
   todoItem.innerHTML += `

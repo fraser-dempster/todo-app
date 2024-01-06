@@ -5,10 +5,10 @@ export function createProjectList(name) {
     pushToProjectList(newProject) {
       this.projects.push(newProject);
     },
-    findProjectByName(name) {
+    findProjectByID(id) {
       let project;
       this.projects.forEach((item) => {
-        if (item.name === name) {
+        if (item.id == id) {
           project = item;
         }
       });
