@@ -38,9 +38,16 @@ export function addTodo(selectedProject) {
       newTodo.completed,
       newTodo.priority
     );
-    fragment.appendChild(todoElement);
-    todoList.appendChild(fragment);
 
-    selectedProject.addTodo(newTodo);
+    if (selectedProject.findTodoByName(todoText)) {
+      alert(
+        "You can't add duplicate tasks to the same project. Please try again."
+      );
+    } else {
+      fragment.appendChild(todoElement);
+      todoList.appendChild(fragment);
+
+      selectedProject.addTodo(newTodo);
+    }
   }
 }
