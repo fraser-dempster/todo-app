@@ -79,6 +79,8 @@ export function setUpUI() {
       }
     });
 
+  function formatDateDependingOnYear(fullDate) {}
+
   document.getElementById("set-date").addEventListener("click", function () {
     const modalElement = document.getElementById("modal-content");
     const todoItemElement = document.getElementById(modalTitle.textContent);
@@ -86,7 +88,6 @@ export function setUpUI() {
     const dateDisplay = todoItemElement.getElementsByClassName("date")[0];
 
     if (modalElement.getElementsByClassName("due-date")[0].value) {
-      console.log(modalElement.getElementsByClassName("due-date")[0].value);
       todoItem.setDueDate(
         modalElement.getElementsByClassName("due-date")[0].value
       );
@@ -173,7 +174,7 @@ export function displayTodos(projectName) {
     let todoItems = selectedProject.getTodoItems();
 
     todoItems.map((item) => {
-      const todoElement = createTodoElementTemplate(item.title);
+      const todoElement = createTodoElementTemplate(item.title, item.dueDate);
       document.getElementById("todo-list").innerHTML += todoElement.innerHTML;
     });
   }
@@ -183,13 +184,33 @@ function clearTodoList() {
   document.getElementById("todo-list").innerHTML = "";
 }
 
-export function createTodoElementTemplate(title) {
+function formatDate(dueDate) {
+  if (
+    dueDate &&
+    format(dueDate, "yyyy") === new Date().getFullYear().toString()
+  ) {
+    console.log("formatted");
+    return format(dueDate, "dd") + format(dueDate, " MMM");
+  } else if (
+    dueDate &&
+    format(dueDate, "yyyy") !== new Date().getFullYear().toString()
+  ) {
+    return (
+      format(dueDate, "dd") + format(dueDate, " MMM") + format(dueDate, " yyyy")
+    );
+  } else {
+    console.log("lol");
+    return dueDate;
+  }
+}
+
+export function createTodoElementTemplate(title, dueDate) {
   const todoItem = document.createElement("div");
 
   todoItem.innerHTML += `
   <div style="background-color: #ff8080" id=${title} class="todo-item">
     <div class="todo-title">${title}</div>
-    <div id="date" class="date"></div>
+    <div id="date" class="date">${formatDate(dueDate)}</div>
     <label class="switch">
       <div class="completed" id="completed"></div> 
       <input class="regular-checkbox" type="checkbox" id="toggleCompleted">
