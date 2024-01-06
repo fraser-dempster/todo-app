@@ -254,3 +254,7 @@ input {
   left: 3px;
   color: #99a1a7;
 }
+
+.modalDescription {
+  border: 1px #000 solid;
+}

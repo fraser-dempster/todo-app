@@ -1,11 +1,14 @@
 import { createTodoElementTemplate } from "./ui";
 
+var numberOfTodos = 1;
+
 function createTodo(title, description, dueDate, priority) {
   return {
     title: title,
     description: description,
     dueDate: dueDate,
     completed: false,
+    id: numberOfTodos,
     priority,
     toggleCompleted: function () {
       this.completed = !this.completed;
@@ -30,24 +33,19 @@ export function addTodo(selectedProject) {
   const todoText = todoInput.value.trim();
 
   if (todoText) {
-    const newTodo = createTodo(todoText, "");
+    const newTodo = createTodo(todoText);
+    console.log(newTodo);
     const todoElement = createTodoElementTemplate(
       todoText,
       newTodo.description,
-      newTodo.dueDate,
-      newTodo.completed,
-      newTodo.priority
+      numberOfTodos
     );
 
-    if (selectedProject.findTodoByName(todoText)) {
-      alert(
-        "You can't add duplicate tasks to the same project. Please try again."
-      );
-    } else {
-      fragment.appendChild(todoElement);
-      todoList.appendChild(fragment);
+    console.log(todoElement);
+    fragment.appendChild(todoElement);
+    todoList.appendChild(fragment);
 
-      selectedProject.addTodo(newTodo);
-    }
+    selectedProject.addTodo(newTodo);
+    numberOfTodos++;
   }
 }

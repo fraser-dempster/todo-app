@@ -16,10 +16,10 @@ export function createProject(name) {
       return this.todos;
     },
 
-    findTodoByName(name) {
+    findTodoByID(id) {
       let todo;
       this.todos.forEach((item) => {
-        if (item.title === name) {
+        if (item.id == id) {
           todo = item;
         }
       });
