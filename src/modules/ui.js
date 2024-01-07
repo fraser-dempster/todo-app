@@ -82,8 +82,6 @@ export function setUpUI() {
       }
     });
 
-  function formatDateDependingOnYear(fullDate) {}
-
   function setDate() {
     const modalElement = document.getElementById("modal-content");
     const todoItemElement = document.getElementById(selectedTodoElement.id);
@@ -114,9 +112,19 @@ export function setUpUI() {
     }
   }
 
-  // document.getElementById("set-date").addEventListener("click", function () {
+  document
+    .getElementById("deleteButton")
+    .addEventListener("click", function () {
+      const myModel = document.getElementById("myModal");
 
-  // });
+      const todoItemElement = document.getElementById(selectedTodoElement.id);
+      const todoItem = selectedProject.findTodoByID(selectedTodoElement.id);
+      const currentTodoItemIndex = selectedProject.todos.indexOf(todoItem);
+
+      selectedProject.deleteTodo(currentTodoItemIndex);
+      todoItemElement.remove();
+      myModel.style.display = "none";
+    });
 
   document
     .getElementById("addTodoButton")
@@ -247,9 +255,11 @@ function formatDate(dueDate) {
 
 export function createTodoElementTemplate(title, dueDate, id) {
   const todoItem = document.createElement("div");
+  todoItem.id = id;
+  todoItem.style.backgroundColor = "#ff8080";
+  todoItem.className = "todo-item";
 
   todoItem.innerHTML += `
-  <div style="background-color: #ff8080" id=${id} class="todo-item">
     <div id="todoTitle" class="todo-title">${title}</div>
     <div id="date" class="date">${formatDate(dueDate)}</div>
     <label class="switch">
@@ -257,7 +267,6 @@ export function createTodoElementTemplate(title, dueDate, id) {
       <input class="regular-checkbox" type="checkbox" id="toggleCompleted">
       <span class="slider round"></span>
   </label>
-  </div>
 `;
 
   return todoItem;

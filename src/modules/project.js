@@ -16,6 +16,13 @@ export function createProject(name) {
       return this.todos;
     },
 
+    deleteTodo(index) {
+      console.log(this.todos);
+      if (index >= 0 && index < this.todos.length) {
+        this.todos.splice(index, 1);
+      }
+    },
+
     findTodoByID(id) {
       let todo;
       this.todos.forEach((item) => {
