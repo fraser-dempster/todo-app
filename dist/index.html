@@ -36,14 +36,19 @@
         <div id="todo-list" class="todo-list"></div>
         <div id="myModal">
           <div class="modal-content" id="modal-content">
-            <input
-              id="due-date"
-              value="yyyy-MM-dd"
-              class="due-date"
-              type="date"
-            />
-            <button id="set-date">Set</button>
-            <h2 contenteditable="true" class="modalTitle" id="modalTitle"></h2>
+            <div class="row">
+              <h2
+                contenteditable="true"
+                class="modalTitle"
+                id="modalTitle"
+              ></h2>
+              <input
+                id="due-date"
+                value="yyyy-MM-dd"
+                class="due-date"
+                type="date"
+              />
+            </div>
             <p style="font-style: italic">
               Write your description underneath here
             </p>
@@ -53,6 +58,11 @@
               class="modalDescription"
               id="modalDescription"
             ></p>
+
+            <div class="row">
+              <button id="saveButton" class="small-button">Save</button>
+              <button id="deleteButton" class="small-button">Delete</button>
+            </div>
           </div>
         </div>
         <button class="addButton" id="addTodoButton">Add Task</button>

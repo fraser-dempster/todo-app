@@ -84,7 +84,7 @@ export function setUpUI() {
 
   function formatDateDependingOnYear(fullDate) {}
 
-  document.getElementById("set-date").addEventListener("click", function () {
+  function setDate() {
     const modalElement = document.getElementById("modal-content");
     const todoItemElement = document.getElementById(selectedTodoElement.id);
     const todoItem = selectedProject.findTodoByID(selectedTodoElement.id);
@@ -111,10 +111,12 @@ export function setUpUI() {
         dateDisplay.innerHTML +=
           format(todoItem.dueDate, "dd") + format(todoItem.dueDate, " MMM");
       }
-    } else {
-      alert("Please select a date");
     }
-  });
+  }
+
+  // document.getElementById("set-date").addEventListener("click", function () {
+
+  // });
 
   document
     .getElementById("addTodoButton")
@@ -162,11 +164,33 @@ export function setUpUI() {
       toggleInputBox("projectInputContainer", "projectInput");
     });
 
+  document.getElementById("saveButton").addEventListener("click", function () {
+    console.log("hello");
+    const myModel = document.getElementById("myModal");
+    const datePicker = document.getElementById("due-date");
+
+    setDate();
+    const todoItem = selectedProject.findTodoByID(selectedTodoElement.id);
+    todoItem.editTitle(
+      myModel.getElementsByClassName("modalTitle")[0].textContent
+    );
+    todoItem.editDescription(
+      myModel.getElementsByClassName("modalDescription")[0].textContent
+    );
+
+    selectedTodoElement.getElementsByClassName("todo-title")[0].innerHTML =
+      todoItem.title;
+
+    datePicker.value = "";
+    myModel.style.display = "none";
+  });
+
   window.addEventListener("click", function (event) {
     const myModel = document.getElementById("myModal");
     const datePicker = document.getElementById("due-date");
 
     if (event.target === myModel) {
+      setDate();
       const todoItem = selectedProject.findTodoByID(selectedTodoElement.id);
       todoItem.editTitle(
         myModel.getElementsByClassName("modalTitle")[0].textContent
