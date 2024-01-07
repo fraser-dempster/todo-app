@@ -165,7 +165,6 @@ export function setUpUI() {
     });
 
   document.getElementById("saveButton").addEventListener("click", function () {
-    console.log("hello");
     const myModel = document.getElementById("myModal");
     const datePicker = document.getElementById("due-date");
 
